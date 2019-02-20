@@ -1,6 +1,7 @@
 package com.septianfujianto.woodroid.Model.Realm;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.septianfujianto.woodroid.Config;
@@ -147,6 +148,7 @@ public class RealmHelper {
             realm.beginTransaction();
 
             for (int i = 0; i < jsonArray.length(); i++) {
+                Log.d("Test", jsonArray.get(i).toString());
                 realm.createOrUpdateObjectFromJson(modelClass, jsonArray.get(i).toString());
             }
 

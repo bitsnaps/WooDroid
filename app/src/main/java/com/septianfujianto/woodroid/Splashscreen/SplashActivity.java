@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.septianfujianto.woodroid.Config.COSTUMER_KEY;
+import static com.septianfujianto.woodroid.Config.COSTUMER_SECRET;
 import static com.septianfujianto.woodroid.Config.RAJAONGKIR_KEY;
 import static com.septianfujianto.woodroid.Config.RAJAONGKIR_STARTER_URL;
 
@@ -61,8 +64,8 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     private void splashScreenTransition() {
         mNotif = "Downloading Province & City data..";
 
-        if (cityRealmResults.size() <= 0) {
-            System.out.println("Downloading City Data...");
+        /*if (cityRealmResults.size() <= 0) {
+            Log.d("Test", "Downloading City Data... NbrOfCityRealmResults: "+ cityRealmResults.size());
             txtSplashNotif.setText(mNotif);
 
             getRajaongkirResults("city", new IPassCallback() {
@@ -70,14 +73,14 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 public void getAPIResults(String jsonResults) {
                     helper = new RealmHelper(context);
                     helper.addtoRealmFromJsonRajaongkir(jsonResults, City.class);
-                    System.out.println("Downloading City complete");
+                    Log.d("Test","Downloading City complete");
                     openMainApp();
                 }
             });
         }
 
         if (provinceRealmResults.size() <= 0) {
-            System.out.println("Downloading Province Data...");
+            Log.d("Test","Downloading Province Data... NbrOfProvinceRealmResults: "+provinceRealmResults.size());
             txtSplashNotif.setText(mNotif);
 
             getRajaongkirResults("province", new IPassCallback() {
@@ -85,13 +88,13 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                public void getAPIResults(String jsonResults) {
                    helper = new RealmHelper(context);
                    helper.addtoRealmFromJsonRajaongkir(jsonResults, Province.class);
-                   System.out.println("Downloading Province Complete");
+                   Log.d("Test","Downloading Province Complete");
 
                    openMainApp();
                }
             });
 
-        }
+        }*/
 
         openMainApp();
     }
@@ -101,30 +104,32 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         RealmResults<City> cityResults = realm.where(City.class).findAll();
         RealmResults<Province> provinceResults = realm.where(Province.class).findAll();
 
-        if (cityResults.size() > 0 && provinceResults.size() > 0) {
-            System.out.println("Opening main app");
+//        if (cityResults.size() > 0 && provinceResults.size() > 0) {
+            Log.d("Test","Opening main app");
             mNotif = "Opening main app";
 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
-        } else {
-            System.out.println("Downloading Data...");
-        }
+//        } else {
+//            Log.d("Test", "Data is not downloaded...");
+//        }
     }
 
     public void getRajaongkirResults(final String endpoint, final IPassCallback callback) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(RAJAONGKIR_STARTER_URL+"/"+endpoint)
-                .addHeader("key", RAJAONGKIR_KEY)
+//                .addHeader("key", RAJAONGKIR_KEY)
+                .addHeader("CONSUMER_KEY", COSTUMER_KEY)
+                .addHeader("CONSUMER_SECRET", COSTUMER_SECRET)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                System.out.println("Failure: Force open main App?");
+                Log.d("Test","Failure: Force open main App?");
 
                if (e.getMessage() != null) {
                    basoProgressView.stopAndError("Something wrong when downloading App Data "+e.getMessage());
@@ -137,6 +142,8 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 if (response.isSuccessful()) {
                     basoProgressView.stopAndGone();
                     callback.getAPIResults(response.body().string());
+                } else {
+                    Log.e("Test", "Error: " + response.toString());
                 }
             }
         });

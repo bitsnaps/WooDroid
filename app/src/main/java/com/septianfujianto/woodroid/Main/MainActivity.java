@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         btnAuth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "RJOKIR CLICk", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Authenticating...", Toast.LENGTH_SHORT).show();
 
                 Realm realm = Realm.getDefaultInstance();
                 RealmResults<Province> dataResults = realm.where(Province.class).findAll();
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    System.out.println("RESPONSE CODE: " + response.code());
+                    Log.d("Test","RESPONSE CODE: " + response.code());
                     Logger.json(response.body().string());
                     Realm realm = Realm.getDefaultInstance();
 
@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("RESPONSE CODE: "+response.code());
-                System.out.println("RESPONSE Header: "+response.headers());
+                Log.d("Test","RESPONSE CODE: "+response.code());
+                Log.d("Test","RESPONSE Header: "+response.headers());
 
                 Log.i("HSXX ", response.headers().name(7));
                 Log.i("HSXX2 ", response.headers().value(7));
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("RESPONSE CODE: "+response.code());
+                Log.d("Test","RESPONSE CODE: "+response.code());
                 Logger.json(response.body().string());
             }
         });
@@ -231,8 +231,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("RESPONSE CODE: "+response.code());
-                System.out.println("RESPONSE: "+response.body().string());
+                Log.d("Test","RESPONSE CODE: "+response.code());
+                Log.d("Test","RESPONSE: "+response.body().string());
             }
         });
     }
@@ -266,8 +266,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("RESPONSE CODE: "+response.code());
-                System.out.println("RESPONSE: "+response.body().string());
+                Log.d("Test","RESPONSE CODE: "+response.code());
+                Log.d("Test","RESPONSE: "+response.body().string());
             }
         });
     }
@@ -298,8 +298,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("RESPONSE CODE: "+response.code());
-                System.out.println("RESPONSE: "+response.body().string());
+                Log.d("Test","RESPONSE CODE: "+response.code());
+                Log.d("Test","RESPONSE: "+response.body().string());
             }
         });
     }

@@ -42,11 +42,11 @@ public class WooCommerceAPI implements WooCommerce {
     @Override
     public List getAll(String endpointBase) {
         String url = String.format(API_URL_FORMAT, config.getUrl(), endpointBase);
-        System.out.println("Fresh Format URL "+url);
+        Log.d("Test","Fresh Format URL "+url);
         String signature = OAuthSignature.getAsQueryString(config, url, HttpMethod.GET);
-        System.out.println("signature  "+signature);
+        Log.d("Test","signature  "+signature);
         String securedUrl = String.format(URL_SECURED_FORMAT, url, signature);
-        System.out.println("securedUrl  "+securedUrl);
+        Log.d("Test","securedUrl  "+securedUrl);
 
         return client.getAll(securedUrl);
     }

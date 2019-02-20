@@ -291,7 +291,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                     if (listCity.getSelectedItemPosition() >= 0) {
                         listCity.setAdapter(null);
                         listCity.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, cList));
-                        System.out.println("DISABLE CITY");
+                        Log.d("Test","DISABLE CITY");
                     } else {
                         listCity.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, cList));
                     }
@@ -355,7 +355,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                 Adapter lCityAdapter = listCity.getAdapter() != null ? listCity.getAdapter() : null;
                 int lCityCount = lCityAdapter != null && lCityAdapter.getCount() > 0 ? lCityAdapter.getCount() : 0;
 
-                System.out.println("setOnFocusChangeListener: "+ lCourierCount);
+                Log.d("Test","setOnFocusChangeListener: "+ lCourierCount);
 
                 if (lCourierCount > 0) {
                     listCourier.setAdapter(null);
@@ -393,8 +393,8 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                 dialog.dismiss();
                 snackbarCourier = Snackbar.make(rootView, "Courier to your city in Unavailable", Snackbar.LENGTH_INDEFINITE);
 
-                System.out.println("RESPONSE SUC: "+response.isSuccessful());
-                System.out.println("RESPONSE RAW: "+response.raw());
+                Log.d("Test","RESPONSE SUC: "+response.isSuccessful());
+                Log.d("Test","RESPONSE RAW: "+response.raw());
 
                 if (response.isSuccessful()) {
                     List<Cost> courierCostsResult = response.body().getRajaongkir().getResults().get(0).getCosts();
@@ -404,7 +404,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                             snackbarCourier.dismiss();
                         }
 
-                        System.out.println("SNACKBAR: "+snackbarCourier.isShownOrQueued());
+                        Log.d("Test","SNACKBAR: "+snackbarCourier.isShownOrQueued());
 
                         courierCostList = HashBiMap.create();
                         List<String> courierLabel = new ArrayList<>();

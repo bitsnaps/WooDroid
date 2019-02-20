@@ -45,7 +45,7 @@ public class DefaultHttpClient implements HttpClient{
     @Override
     public List getAll(String url) {
         List<String> result = new ArrayList<>();
-        System.out.println("GETALLURL "+url);
+        Log.d("Test","GETALLURL "+url);
 
         /*try {
             OkHttpClient client = new OkHttpClient();
@@ -65,7 +65,7 @@ public class DefaultHttpClient implements HttpClient{
                         throw new IOException("Unexpected code " + response);
                     } else {
                         Log.e("btnAddToCart", "OKHTTP RESPONSE");
-                        System.out.println("==================");
+                        Log.d("Test","==================");
                         Log.e("OKHTTP RESPONSE", response.body().string());
                     }
                 }
@@ -108,7 +108,7 @@ public class DefaultHttpClient implements HttpClient{
                         throw new IOException("Unexpected code " + response);
                     } else {
                         Log.e("btnAddToCart", "OKHTTP RESPONSE");
-                        System.out.println("==================");
+                        Log.d("Test","==================");
                         Log.e("OKHTTP RESPONSE", response.body().string());
                     }
                 }

@@ -54,6 +54,8 @@ import static com.septianfujianto.woodroid.Config.SITE_URL;
 
 public class ProductsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BasoProgressView.OnClickListener {
+
+
     private RecyclerView mProductRcv;
     private Context mContext;
     private List<Product> listProducts;
@@ -147,12 +149,12 @@ public class ProductsActivity extends AppCompatActivity
             @Override
             public void run() {
                 int cartSize = realmResults.size();
-                System.out.println("CARTSIZECREAT: "+cartSize);
+                Log.d("Test","CARTSIZECREAT: "+cartSize);
 
                 realmResults.addChangeListener(new RealmChangeListener<RealmResults<Cart>>() {
                     @Override
                     public void onChange(RealmResults<Cart> element) {
-                        System.out.println("Something changed: "+element.size());
+                        Log.d("Test","Something changed: "+element.size());
                         if (element.size() < 1) {
                             fab.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                         } else {
@@ -184,6 +186,7 @@ public class ProductsActivity extends AppCompatActivity
                     listProducts.addAll(response.body());
                     adapter.notifyDataChanged();
                 } else {
+                    Log.e("Test","Error: " + response.raw().toString());
                     basoProgressView.stopAndError("Oops, something Wrong: "+String.valueOf(response.code()));
                     basoProgressView.setOnButtonClickListener(onClickListener);}
             }
